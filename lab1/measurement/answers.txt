@@ -1,0 +1,68 @@
+Q2:
+
+Expected:
+latency 160ms
+throughput 20Mbps
+
+Measurement:
+latency 161.793ms
+throughput 18.581Mbps
+
+The latency of a path is twice the sum of the latencies between all switches on the path, plus other latencies such as queuing delay and processing delay. Slightly larger than 160ms.
+The throughput is determined by the minimum bandwidth between the switches along the path. The actual measured value is slightly less than 20 Mbps.
+
+Q3:
+
+Expected:
+
+two pairs:
+latency: 160ms
+throughput: 10Mbps
+
+three pairs:
+latency: 160ms
+throughput: 6.67Mbps
+
+Measurement:
+
+two pairs:
+latency:
+h1-h4: 162.041ms
+h7-h9: 161.964ms
+throughput:
+h1-h4: 7.817Mbps
+h7-h9: 11.585Mbps
+
+three pairs:
+latency:
+h1-h4: 161.778ms
+h7-h9: 161.878ms
+h8-h10: 161.879ms
+throughput:
+h1-h4: 5.425Mbps
+h7-h9: 9.368Mbps
+h8-h10: 4.309Mbps
+
+During multiplexing, the RTT is not affected, but the throughput is distributed among different paths. However, the TCP does not guarantee equal distribution of throughput, so the measured results for each path are not equal, but their sum is approximately equal to the actual throughput measured in the previous question.
+
+Q4:
+
+Expected:
+latency:
+h1-h4: 160ms
+h5-h6: 40ms
+throughput:
+h1-h4: 20Mbps
+h5-h6: 25Mbps
+
+Measurement:
+latency:
+h1-h4: 161.754ms
+h5-h6: 41.802ms
+throughput:
+h1-h4: 16.464Mbps
+h5-h6: 21.013Mbps
+
+The latency yielded the expected results, based on the same principle as above. The RTT was slightly more than double the sum of the latencies of all switches along the path.
+The measurement results of throughput show a significant discrepancy from the predictions.
+The reason is that the two paths share L2, and the throughput of the two paths is distributed on L2; therefore, L2 may become a bottleneck for throughput.
